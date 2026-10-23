@@ -1,6 +1,6 @@
 import type { symbols } from './constants'
 
-export type Symbol = typeof symbols[number]
+export type MathSymbol = typeof symbols[number]
 export type Vars = Record<string, string>
 
 export interface VariableNode {
@@ -27,14 +27,14 @@ export interface NumberNode {
 export interface UnaryNode {
   type: 'unary'
   node: Node | undefined
-  value: Symbol | undefined
+  value: MathSymbol | undefined
 }
 
 export interface SymbolNode {
   type: 'symbol'
   leftNode: Node | undefined
   rightNode: Node | undefined
-  value: Symbol | undefined
+  value: MathSymbol | undefined
 }
 
 export type Node = VariableNode | FunctionNode | NumberNode | UnaryNode | SymbolNode | PercentageNode

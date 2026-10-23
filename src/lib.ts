@@ -1,7 +1,7 @@
 import { symbols } from './constants'
-import type { MathFunction } from './types'
+import type { MathFunction, MathSymbol } from './types'
 
-export const isSymbol = (str: any): str is Symbol => symbols.includes(str)
+export const isSymbol = (str: any): str is MathSymbol => symbols.includes(str)
 export const toRadians = (x: number) => x * Math.PI / 180
 export const toDegrees = (x: number) => x * 180 / Math.PI
 
