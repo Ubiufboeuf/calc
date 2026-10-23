@@ -1,5 +1,6 @@
-
-import { calc, FunctionNode, functions, Node, Vars } from '.'
+import { calc } from '.'
+import { functions } from './src/lib'
+import type { FunctionNode, Node, Vars } from './src/types'
 
 export function evaluate (node: Node, vars: Vars): string {
   if (node.type === 'function') {
@@ -7,7 +8,7 @@ export function evaluate (node: Node, vars: Vars): string {
   }
 
   if (node.type === 'variable') {
-    return calc(vars[node.value], vars)
+    return calc(vars[node.value]!, vars)
   }
 
   if (node.type === 'number') {
@@ -76,7 +77,7 @@ function evaluateFunction (node: FunctionNode, vars: Vars): string | number {
 
   const args = splitArguments(content)
 
-  return functions[node.function](
+  return functions[node.function]!(
     ...args.map((arg) => Number(calc(arg, vars)))
   )
 }

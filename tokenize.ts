@@ -1,13 +1,5 @@
-
-type TokenType = 'number' | 'identifier' | 'symbol'
-
-interface Token {
-  type: TokenType
-  value: string
-  position: number
-}
-
-const TOKEN_REGEX = /(?<number>(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)|(?<identifier>[a-zA-Z_]\w*)|(?<symbol>[+\-*/()%(),])/y
+import { TOKEN_REGEX } from './src/constants'
+import type { Token, TokenType } from './src/types'
 
 export function tokenize (operation: string, functionNames: readonly string[]): string[] {
   const functions = new Set(functionNames)
@@ -18,7 +10,10 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
 
   // Etapa 1: reconocimiento de tokens
   while (cursor < operation.length) {
-    if (/\s/.test(operation[cursor])) {
+    const char = operation[cursor]
+    if (!char) continue
+
+    if (/\s/.test(char)) {
       cursor++
       continue
     }
@@ -28,7 +23,7 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
 
     if (!match) {
       throw new SyntaxError(
-        `Token inválido en posición ${cursor}: ${operation[cursor]}`
+        `Token inválido en posición ${cursor}: ${char}`
       )
     }
 
@@ -83,7 +78,7 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
 
     // Las funciones registradas necesitan paréntesis
     if (
-      current.type === 'identifier' &&
+      current?.type === 'identifier' &&
       functions.has(current.value) &&
       next?.value !== '('
     ) {
@@ -94,7 +89,7 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
 
     if (previous) {
       // Evitar interpretar "2 3" o "2.3.4" como expresiones válidas
-      if (previous.type === 'number' && current.type === 'number') {
+      if (previous.type === 'number' && current?.type === 'number') {
         throw new SyntaxError(
           `Dos números consecutivos en posición ${current.position}`
         )
@@ -107,13 +102,13 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
         previous.value === '%'
 
       const right =
-        current.type === 'number' ||
-        current.type === 'identifier' ||
-        current.value === '('
+        current?.type === 'number' ||
+        current?.type === 'identifier' ||
+        current?.value === '('
 
       const isFunctionCall =
         previous.type === 'identifier' &&
-        current.value === '(' &&
+        current?.value === '(' &&
         functions.has(previous.value)
 
       if (left && right && !isFunctionCall) {
@@ -121,7 +116,7 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
       }
     }
 
-    result.push(current.value)
+    if (current?.value) result.push(current.value)
   }
 
   return result

@@ -1,6 +1,5 @@
-import { functions, isSymbol, VariableNode, Vars, type Node } from '.'
-
-type ParseResult = Node
+import { functions, isSymbol } from './src/lib'
+import type { Node, ParseResult } from './src/types'
 
 const LOOP_LIMIT = 50
 let iteration = 0
@@ -33,7 +32,7 @@ function parseAdditive (tokens: string[]): ParseResult {
     return depth === 0 &&
       i > 0 &&
       (t === '+' || t === '-') &&
-      !['+', '-', '*', '/', '('].includes(tokens[i - 1])
+      !['+', '-', '*', '/', '('].includes(tokens[i - 1]!)
   })
 
   if (additiveIndex === -1) {
@@ -52,7 +51,7 @@ function parseAdditive (tokens: string[]): ParseResult {
 
   const node: Node = {
     type: 'symbol',
-    value: symbol,
+    value: symbol as any,
     leftNode: left.length ? parseAdditive(left) : undefined,
     rightNode: parseMultiplicative(right),
   }
@@ -91,7 +90,7 @@ function parseMultiplicative (tokens: string[]): ParseResult {
 
   const node: Node = {
     type: 'symbol',
-    value: symbol,
+    value: symbol as any,
     leftNode: parseMultiplicative(left),
     rightNode: parseUnary(right)
   }
@@ -134,7 +133,7 @@ function parsePrimary (tokens: string[]): ParseResult {
   }
 
   if (Number.isNaN(Number(firstToken))) {
-    if (functions[firstToken]) {
+    if (firstToken && functions[firstToken]) {
       return {
         type: 'function',
         function: firstToken,
@@ -167,7 +166,7 @@ function parsePrimary (tokens: string[]): ParseResult {
   
   const node: Node = {
     type: 'number',
-    value: firstToken
+    value: firstToken!
   }
 
   return node
