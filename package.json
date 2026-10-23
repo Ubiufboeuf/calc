@@ -1,8 +1,11 @@
 {
-  "name": "zalk",
-  "module": "index.ts",
+  "name": "@mangufaf/zalk",
   "version": "1.0.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "start": "bun index.ts",
     "dev": "bun --watch index.ts",
