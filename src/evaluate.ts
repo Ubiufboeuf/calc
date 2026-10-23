@@ -1,6 +1,6 @@
-import { calc } from '.'
-import { functions } from './src/lib'
-import type { FunctionNode, Node, Vars } from './src/types'
+import { calc } from './calc'
+import { functions } from './lib'
+import type { FunctionNode, Node, Vars } from './types'
 
 export function evaluate (node: Node, vars: Vars): string {
   if (node.type === 'function') {

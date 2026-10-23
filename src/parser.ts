@@ -1,5 +1,5 @@
-import { functions, isSymbol } from './src/lib'
-import type { Node, ParseResult } from './src/types'
+import { functions, isSymbol } from './lib'
+import type { Node, ParseResult } from './types'
 
 const LOOP_LIMIT = 50
 let iteration = 0

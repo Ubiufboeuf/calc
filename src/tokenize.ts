@@ -1,5 +1,5 @@
-import { TOKEN_REGEX } from './src/constants'
-import type { Token, TokenType } from './src/types'
+import { TOKEN_REGEX } from './constants'
+import type { Token, TokenType } from './types'
 
 export function tokenize (operation: string, functionNames: readonly string[]): string[] {
   const functions = new Set(functionNames)
