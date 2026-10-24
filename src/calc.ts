@@ -22,6 +22,3 @@ export function calc (operation: string, vars: Vars = {}): string {
 
   return result
 }
-
-const operation = '(0.1 + 0.2) * 10 - 3 * 0 + 3'
-console.log(operation, '=', calc(operation, { r: '2' }))
