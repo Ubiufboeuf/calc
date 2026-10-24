@@ -99,7 +99,8 @@ export function tokenize (operation: string, functionNames: readonly string[]): 
         previous.type === 'number' ||
         previous.type === 'identifier' ||
         previous.value === ')' ||
-        previous.value === '%'
+        previous.value === '%' ||
+        previous.value === '!'
 
       const right =
         current?.type === 'number' ||

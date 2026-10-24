@@ -1,4 +1,4 @@
-export const symbols = ['+', '-', '*', '/', '(', ')', '%'] as const
+export const symbols = ['+', '-', '*', '/', '(', ')', '%', '!'] as const
 export const DEFAULT_VARS = {
   E: String(Math.E),
   LN10: String(Math.LN10),
@@ -10,4 +10,4 @@ export const DEFAULT_VARS = {
   SQRT2: String(Math.SQRT2),
 }
 
-export const TOKEN_REGEX = /(?<number>(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)|(?<identifier>[a-zA-Z_]\w*)|(?<symbol>[+\-*/()%(),])/y
+export const TOKEN_REGEX = /(?<number>(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)|(?<identifier>[a-zA-Z_]\w*)|(?<symbol>[+\-*/()%(),!])/y

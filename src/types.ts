@@ -19,6 +19,11 @@ export interface PercentageNode {
   value: Node
 }
 
+export interface FactorialNode {
+  type: 'factorial'
+  value: Node
+}
+
 export interface NumberNode {
   type: 'number'
   value: string
@@ -37,7 +42,7 @@ export interface SymbolNode {
   value: MathSymbol | undefined
 }
 
-export type Node = VariableNode | FunctionNode | NumberNode | UnaryNode | SymbolNode | PercentageNode
+export type Node = VariableNode | FunctionNode | NumberNode | UnaryNode | SymbolNode | PercentageNode | FactorialNode
 
 export type MathFunction = (...numbers: number[]) => string | number
 

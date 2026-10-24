@@ -20,6 +20,11 @@ export function evaluate (node: Node, vars: Vars): string {
     return `${val / 100}`
   }
 
+  if (node.type === 'factorial') {
+    const val = Number(evaluate(node.value, vars))
+    return `${factorial(val)}`
+  }
+
   if (node.type === 'unary') {
     const { node: innerNode, value: symbol } = node
     if (!innerNode) return ''
@@ -102,4 +107,19 @@ function splitArguments (content: string): string[] {
   args.push(content.slice(start).trim())
 
   return args
+}
+
+function factorial (n: number): number {
+  if (!Number.isInteger(n) || n < 0) {
+    throw new Error('Factorial inválido')
+  }
+
+  let result = 1
+
+  while (n > 1) {
+    result *= n
+    n--
+  }
+
+  return result
 }

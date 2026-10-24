@@ -125,6 +125,14 @@ function parsePrimary (tokens: string[]): ParseResult {
     }
   }
 
+  if (lastToken === '!') {
+    const innerTokens = tokens.slice(0, -1) // Quitamos el '!' y evaluamos lo que queda adentro
+    return {
+      type: 'factorial',
+      value: parsePrimary(innerTokens)
+    }
+  }
+
   const firstToken = tokens[0]
 
   if (firstToken === '(' && lastToken === ')') {
