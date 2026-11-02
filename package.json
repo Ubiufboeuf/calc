@@ -1,11 +1,39 @@
 {
   "name": "@mangufaf/zalk",
   "version": "1.2.0",
+  "description": "A lightweight, zero-dependency mathematical expression engine written in TypeScript.",
+  "keywords": [
+    "math",
+    "expression",
+    "parser",
+    "calculator",
+    "ast",
+    "evaluator",
+    "typescript",
+    "zero-dependency",
+    "zalk"
+  ],
+  "homepage": "https://github.com/Ubiufboeuf/zalk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ubiufboeuf/zalk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ubiufboeuf/zalk/issues"
+  },
   "license": "MIT",
+  "author": "mAngo",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
   "files": [
     "dist"
   ],
