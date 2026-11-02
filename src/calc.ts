@@ -3,10 +3,10 @@ import { parser } from './parser'
 import { preprocess } from './preprocess'
 import { DEFAULT_VARS } from './constants'
 import { functions } from './lib'
-import type { Vars } from './types'
+import type { ExternalVars, Vars } from './types'
 import { tokenize } from './tokenize'
 
-export function calc (operation: string, vars: Vars = {}): string {
+export function calc (operation: string, externalVars: ExternalVars = {}): string {
   if (!operation) return ''
   
   const preparedOperation = preprocess(operation)
@@ -16,6 +16,12 @@ export function calc (operation: string, vars: Vars = {}): string {
   
   const tree = parser(tokens)
   // console.log('tree:', tree)
+  
+  const vars: Vars = {}
+  for (const k in externalVars) {
+    const v = externalVars[k]
+    vars[k] = String(v)
+  }
   
   const result = evaluate(tree, { ...DEFAULT_VARS, ...vars })
   // console.log('result:', result)

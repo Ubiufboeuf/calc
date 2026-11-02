@@ -2,6 +2,7 @@ import type { symbols } from './constants'
 
 export type MathSymbol = typeof symbols[number]
 export type Vars = Record<string, string>
+export type ExternalVars = Record<string, string | number>
 
 export interface VariableNode {
   type: 'variable'
