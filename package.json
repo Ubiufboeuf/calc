@@ -13,13 +13,13 @@
     "zero-dependency",
     "zalk"
   ],
-  "homepage": "https://github.com/Ubiufboeuf/zalk#readme",
+  "homepage": "https://github.com/Ubiufboeuf/calc#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ubiufboeuf/zalk.git"
+    "url": "git+https://github.com/Ubiufboeuf/calc.git"
   },
   "bugs": {
-    "url": "https://github.com/Ubiufboeuf/zalk/issues"
+    "url": "https://github.com/Ubiufboeuf/calc/issues"
   },
   "license": "MIT",
   "author": "mAngo",
