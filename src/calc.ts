@@ -30,22 +30,22 @@ export function calc (operation: string, externalVars: ExternalVars = {}): strin
 }
 
 export function prepare (operation: string) {
-  if (!operation) return
-
   const preparedOperation = preprocess(operation)
   
   const tokens = tokenize(preparedOperation, Object.keys(functions))
   
   const tree = parser(tokens)
-
-  return {
-    evaluate: (externalVars: ExternalVars = {}) => { 
-      const vars: Vars = {}
-      for (const k in externalVars) {
-        const v = externalVars[k]
-        vars[k] = typeof v === 'string' ? v : String(v)
-      }
-      evaluate(tree, { ...DEFAULT_VARS, ...vars })
+  
+  const formula = (externalVars: ExternalVars = {}) => { 
+    const vars: Vars = {}
+    for (const k in externalVars) {
+      const v = externalVars[k]
+      vars[k] = typeof v === 'string' ? v : String(v)
     }
+    return evaluate(tree, { ...DEFAULT_VARS, ...vars })
   }
+
+  formula.evaluate = formula
+
+  return formula
 }
