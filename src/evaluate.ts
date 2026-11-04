@@ -1,4 +1,4 @@
-import { calc } from './calc'
+import { calc } from './zalk'
 import { functions } from './lib'
 import type { FunctionNode, Node, Vars } from './types'
 

@@ -1,4 +1,4 @@
-export * from './calc'
+export * from './zalk'
 export * from './constants'
 export * from './evaluate'
 export * from './lib'
