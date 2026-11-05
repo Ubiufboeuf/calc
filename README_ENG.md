@@ -31,7 +31,7 @@ expr.evaluate({ x: 3, y: 4 })  // '5'
 
 // Numerical equation solving
 solve('2x = 5', 'x')           // ['2.5']
-solve('x^2 = 4', 'x')          // ['-2', '2']
+solve('pow(x, 2) = 4', 'x')    // ['-2', '2']
 solve('x(2x + 1) = 10', 'x')   // ['-2.5', '2']
 
 // Root finding with custom options
