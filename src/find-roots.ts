@@ -53,7 +53,8 @@ function asPolynomial(node: Node, variable: string): Polynomial | null {
     if (typeof name !== 'string') return null
     if (name === variable) return [0, 1]
     if (!(name in DEFAULT_VARS)) return null
-    const constant = Number(DEFAULT_VARS[name])
+
+    const constant = Number(DEFAULT_VARS[name as keyof typeof DEFAULT_VARS])
     return Number.isFinite(constant) ? [constant] : null
   }
 
@@ -81,19 +82,6 @@ function asPolynomial(node: Node, variable: string): Polynomial | null {
       if (right.length !== 1 || divisor === undefined || divisor === 0) return null
       const divided = left.map(value => value / divisor)
       return divided.every(Number.isFinite) ? trim(divided) : null
-    }
-    case '^':
-    case '**': {
-      const exponent = right[0]
-      if (right.length !== 1 || exponent === undefined || !Number.isInteger(exponent) || exponent < 0) return null
-      if (exponent * (left.length - 1) > MAX_POLYNOMIAL_DEGREE) return null
-      let result: Polynomial = [1]
-      for (let i = 0; i < exponent; i++) {
-        const next = multiply(result, left)
-        if (!next) return null
-        result = next
-      }
-      return result
     }
     default: return null
   }
