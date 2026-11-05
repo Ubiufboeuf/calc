@@ -1,46 +1,66 @@
 # Zalk
 
-A lightweight mathematical expression engine written in TypeScript. Parse and evaluate complex expressions with variables, scientific functions, constants, and implicit multiplication.
+Mathematical expression engine developed in TypeScript. Supports complex expressions, variables, scientific functions, and numerical equation solving.
 
 ## Installation
 
 ```bash
-npm install @mangufaf/zalk
+# npm
+npm install -E @mangufaf/zalk
+
+# pnpm
+pnpm add -E @mangufaf/zalk
+
+# bun
+bun add -E @mangufaf/zalk
 ```
 
 ## Usage
 
 ```ts
-import { calc, prepare } from '@mangufaf/zalk'
+import { calc, prepare, solve } from '@mangufaf/zalk'
 
 calc('2 + 3 * 4')               // '14'
 calc('sqrt(16) + pow(2, 3)')    // '12'
 calc('100 + 15%')               // '115'
 calc('2PI * r', { r: 5 })       // '31.41592653589793'
 
-// Preprocessing the AST for high-performance repeated evaluations
+// Repeated evaluations with a preprocessed AST
 const expr = prepare('sqrt(pow(x, 2) + pow(y, 2))')
 expr.evaluate({ x: 3, y: 4 })  // '5'
+
+// Numerical equation solving
+solve('2x = 5', 'x')           // ['2.5']
+solve('x^2 = 4', 'x')          // ['-2', '2']
+solve('x(2x + 1) = 10', 'x')   // ['-2.5', '2']
+
+// Root finding with custom options
+solve('sin(x) = 0', 'x', {
+  min: -20,
+  max: 20,
+  samples: 8192,
+  tolerance: 1e-16
+})
 ```
 
 ## Features
 
-- Mathematical expressions with operator precedence and parentheses.
-- Scientific functions, including trigonometry, logarithms, and roots.
-- Flexible variables (numbers and strings) and built-in mathematical constants.
-- Implicit multiplication (`2PI`, `2(3 + 4)`).
-- Context-aware percentages and nested functions.
-- `prepare` function to cache the AST and optimize loops or high-frequency calls.
-- Custom lexer, parser, AST, and evaluator.
-- Zero runtime dependencies.
+- Mathematical operations with operator precedence and parentheses.
+- Scientific functions, variables, and mathematical constants.
+- Implicit multiplication and contextual percentages.
+- `prepare` function for optimizing repeated evaluations.
+- `solve` function for finding real roots, including multiple solutions.
+- Configurable search interval, sampling, and tolerance.
+- Custom tokenizer, parser, AST, and evaluator.
+- No runtime dependencies.
 
-## How it works
+**Note:** `solve` uses numerical methods and does not guarantee finding all roots of general functions. Results are subject to JavaScript's numerical precision.
 
-Zalk processes expressions through four stages:
+## How It Works
 
 **Tokenization → Parsing → AST → Evaluation**
 
-Each stage is implemented in TypeScript, without relying on `eval()`.
+All processing is implemented in TypeScript without using `eval()`.
 
 ## License
 
